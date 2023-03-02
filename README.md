@@ -1,5 +1,7 @@
 # API
 
+[![CI](https://github.com/gtsofa/EssentialFeedII/actions/workflows/CI.yml/badge.svg)](https://github.com/gtsofa/EssentialFeedII/actions/workflows/CI.yml)
+
 ## Backlog
 - [x] Model Specs
 - [x] Payload Contract
