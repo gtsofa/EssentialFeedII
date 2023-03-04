@@ -1,6 +1,7 @@
 # API
 
-[![CI](https://github.com/gtsofa/EssentialFeedII/actions/workflows/CI.yml/badge.svg)](https://github.com/gtsofa/EssentialFeedII/actions/workflows/CI.yml)
+[![CI-iOS](https://github.com/gtsofa/EssentialFeedII/actions/workflows/CI-iOS.yml/badge.svg)](https://github.com/gtsofa/EssentialFeedII/actions/workflows/CI-iOS.yml)
+[![CI-macOS](https://github.com/gtsofa/EssentialFeedII/actions/workflows/CI-macOS.yml/badge.svg)](https://github.com/gtsofa/EssentialFeedII/actions/workflows/CI-macOS.yml)
 
 ## Backlog
 - [x] Model Specs
