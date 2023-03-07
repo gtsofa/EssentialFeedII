@@ -56,15 +56,13 @@ final class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfRenderedFeedImageViews(), 1)
         assertThat(sut, hasViewConfiguredFor: image0, at: 0)
         
-        let view = sut.feedImageView(at: 0) as? FeedImageCell
-        XCTAssertNotNil(view)
-        XCTAssertEqual(view?.isShowingLocation, true)
-        XCTAssertEqual(view?.locationText, image0.location)
-        XCTAssertEqual(view?.descriptionText, image0.description)
-        
         sut.simulateUserInitiatedFeedReload()
         loader.completeFeedLoading(with: [image0, image1, image2, image3], at: 1)
         XCTAssertEqual(sut.numberOfRenderedFeedImageViews(), 4)
+        assertThat(sut, hasViewConfiguredFor: image0, at: 0)
+        assertThat(sut, hasViewConfiguredFor: image1, at: 1)
+        assertThat(sut, hasViewConfiguredFor: image2, at: 2)
+        assertThat(sut, hasViewConfiguredFor: image3, at: 3)
         
     }
     
