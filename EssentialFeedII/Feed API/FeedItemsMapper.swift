@@ -23,7 +23,7 @@ internal final class FeedItemsMapper {
         let image: URL
         
         var item: FeedImage {
-            return FeedImage(id: id, description: description, location: location, imageURL: image)
+            return FeedImage(id: id, description: description, location: location, url: image)
         }
     }
     
