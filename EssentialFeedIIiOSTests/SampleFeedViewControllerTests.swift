@@ -38,41 +38,62 @@ public final class TestFeedImageCell: UITableViewCell {
     }
 }
 
+class SampleFeedRefreshViewController: NSObject {
+    private(set) lazy var view: UIRefreshControl = {
+        let view = UIRefreshControl()
+        view.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return view
+    }()
+    
+    private var feedLoader: FeedLoader
+    
+    init(feedLoader: FeedLoader) {
+        self.feedLoader = feedLoader
+    }
+    
+    var onRefresh: (([FeedImage]) -> Void)?
+    
+    @objc func refresh() {
+        view.beginRefreshing()
+        feedLoader.load { [weak self] result in
+            if let feed = try? result.get() {
+                self?.onRefresh?(feed)
+                
+            }
+            self?.view.endRefreshing()
+            
+        }
+    }
+}
+
 class SampleFeedViewController: UITableViewController, UITableViewDataSourcePrefetching {
     
-    private var feedLoader: FeedLoader?
+    private var refreshController: SampleFeedRefreshViewController?
     private var imageLoader: TestFeedImageDataLoader?
-    private var tableModel = [FeedImage]()
+    private var tableModel = [FeedImage]() {
+        didSet {tableView.reloadData()}
+    }
     
     private var tasks = [IndexPath: TestFeedImageDataLoaderTask]()
     
     convenience init(feedLoader: FeedLoader, imageLoader: TestFeedImageDataLoader) {
         self.init()
-        self.feedLoader = feedLoader
+        self.refreshController = SampleFeedRefreshViewController(feedLoader: feedLoader)
         self.imageLoader = imageLoader
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
+        refreshControl = refreshController?.view
+        refreshController?.onRefresh = { [weak self] feed in
+            self?.tableModel = feed
+        }
+        
         tableView.prefetchDataSource = self
         
-        load()
+        refreshController?.refresh()
         
-    }
-    
-    @objc private func load() {
-        refreshControl?.beginRefreshing()
-        feedLoader?.load { [weak self] result in
-            if let feed = try? result.get() {
-                self?.tableModel = feed
-                self?.tableView.reloadData()
-            }
-            self?.refreshControl?.endRefreshing()
-            
-        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
