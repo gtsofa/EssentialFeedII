@@ -38,6 +38,22 @@ public final class TestFeedImageCell: UITableViewCell {
     }
 }
 
+final class SampleFeedUIComposer {
+    private init() {}
+    
+    public static func feedComposedWith(feedLoader: FeedLoader, imageLoader: TestFeedImageDataLoader) -> SampleFeedViewController {
+        let refreshController = SampleFeedRefreshViewController(feedLoader: feedLoader)
+        let feedController = SampleFeedViewController(refreshController: refreshController)
+        refreshController.onRefresh = { [weak feedController] feed in
+            feedController?.tableModel = feed.map { model in
+                SampleFeedImageCellController(model: model, imageLoader: imageLoader)
+            }
+        }
+        
+        return feedController
+    }
+}
+
 final class SampleFeedImageCellController {
     private var task: TestFeedImageDataLoaderTask?
     private let model: FeedImage, imageLoader: TestFeedImageDataLoader
@@ -73,7 +89,11 @@ final class SampleFeedImageCellController {
         return cell
     }
     
-    deinit {
+    public func preload() {
+        task = imageLoader.loadImageData(from: model.url) { _ in }
+    }
+    
+    func cancelLoad() {
         task?.cancel()
     }
 }
@@ -106,30 +126,28 @@ class SampleFeedRefreshViewController: NSObject {
     }
 }
 
+
 class SampleFeedViewController: UITableViewController, UITableViewDataSourcePrefetching {
     
     private var refreshController: SampleFeedRefreshViewController?
-    private var imageLoader: TestFeedImageDataLoader?
-    private var tableModel = [FeedImage]() {
+    
+    var tableModel = [SampleFeedImageCellController]() {
         didSet {tableView.reloadData()}
     }
     
     private var tasks = [IndexPath: TestFeedImageDataLoaderTask]()
-    private var cellControllers = [IndexPath: SampleFeedImageCellController]()
     
-    convenience init(feedLoader: FeedLoader, imageLoader: TestFeedImageDataLoader) {
+    convenience init(refreshController: SampleFeedRefreshViewController) {
         self.init()
-        self.refreshController = SampleFeedRefreshViewController(feedLoader: feedLoader)
-        self.imageLoader = imageLoader
+        self.refreshController = refreshController
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         refreshControl = refreshController?.view
-        refreshController?.onRefresh = { [weak self] feed in
-            self?.tableModel = feed
-        }
+        
         
         tableView.prefetchDataSource = self
         
@@ -142,31 +160,29 @@ class SampleFeedViewController: UITableViewController, UITableViewDataSourcePref
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellModel = tableModel[indexPath.row]
-        let cellController = SampleFeedImageCellController(model: cellModel, imageLoader: imageLoader!)
-        cellControllers[indexPath] = cellController
-        return cellController.view()
+        return cellController(forRowAt: indexPath).view()
     }
     
     override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        removeCellController(forRowAt: indexPath)
+        cancelCellControllerLoad(forRowAt: indexPath)
     }
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         indexPaths.forEach {indexPath in
-            let cellModel = tableModel[indexPath.row]
-            let cellController = SampleFeedImageCellController(model: cellModel, imageLoader: imageLoader!)
-            cellControllers[indexPath] = cellController
-            _ = cellController.view()
+            cellController(forRowAt: indexPath).preload()
         }
     }
     
     func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach(removeCellController)
+        indexPaths.forEach(cancelCellControllerLoad)
     }
     
-    private func removeCellController(forRowAt indexPath: IndexPath) {
-        cellControllers[indexPath] = nil
+    private func cellController(forRowAt indexPath: IndexPath) -> SampleFeedImageCellController {
+        return tableModel[indexPath.row]
+    }
+    
+    private func cancelCellControllerLoad(forRowAt indexPath: IndexPath) {
+        cellController(forRowAt: indexPath).cancelLoad()
     }
     
 }
@@ -417,7 +433,7 @@ final class SampleFeedViewControllerTests: XCTestCase {
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: SampleFeedViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = SampleFeedViewController(feedLoader: loader, imageLoader: loader)
+        let sut = SampleFeedUIComposer.feedComposedWith(feedLoader: loader, imageLoader: loader)
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
