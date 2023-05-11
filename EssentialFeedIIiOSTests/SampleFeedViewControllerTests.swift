@@ -44,13 +44,17 @@ final class SampleFeedUIComposer {
     public static func feedComposedWith(feedLoader: FeedLoader, imageLoader: TestFeedImageDataLoader) -> SampleFeedViewController {
         let refreshController = SampleFeedRefreshViewController(feedLoader: feedLoader)
         let feedController = SampleFeedViewController(refreshController: refreshController)
-        refreshController.onRefresh = { [weak feedController] feed in
-            feedController?.tableModel = feed.map { model in
-                SampleFeedImageCellController(model: model, imageLoader: imageLoader)
-            }
-        }
+        refreshController.onRefresh = adaptFeedCellControllers(forwardingTo: feedController, loader: imageLoader)
         
         return feedController
+    }
+    
+    private static func adaptFeedCellControllers(forwardingTo controller: SampleFeedViewController, loader: TestFeedImageDataLoader) -> ([FeedImage]) -> Void {
+        return { [weak controller] feed in
+            controller?.tableModel = feed.map { model in
+                SampleFeedImageCellController(model: model, imageLoader: loader)
+            }
+        }
     }
 }
 
