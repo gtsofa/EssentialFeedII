@@ -250,6 +250,7 @@
 		C67392BD2A94C4B40083DF75 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C649667F29B75CD100E0359E /* FeedImageCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -267,7 +268,6 @@
 			children = (
 				C67392BE2A94C52A0083DF75 /* Feed Image Loader */,
 				C67392BA2A94C4920083DF75 /* Feed UI */,
-				C649667F29B75CD100E0359E /* FeedImageCell.swift */,
 				C692A83C29B9D10C00E0408C /* UIView+Shimmering.swift */,
 			);
 			path = EssentialFeedIIiOS;
