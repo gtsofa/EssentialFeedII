@@ -228,10 +228,34 @@
 			path = "Feed Feature";
 			sourceTree = "<group>";
 		};
-		C67503B029B32C9C0030D5F5 /* EssentialFeedIIiOS */ = {
+		C67392BA2A94C4920083DF75 /* Feed UI */ = {
+			isa = PBXGroup;
+			children = (
+				C67392BD2A94C4B40083DF75 /* Views */,
+				C67392BC2A94C4AC0083DF75 /* Controllers */,
+			);
+			path = "Feed UI";
+			sourceTree = "<group>";
+		};
+		C67392BC2A94C4AC0083DF75 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				C67503CE29B52C030030D5F5 /* FeedViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C67392BD2A94C4B40083DF75 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C67503B029B32C9C0030D5F5 /* EssentialFeedIIiOS */ = {
+			isa = PBXGroup;
+			children = (
+				C67392BA2A94C4920083DF75 /* Feed UI */,
 				C649667F29B75CD100E0359E /* FeedImageCell.swift */,
 				C692A83C29B9D10C00E0408C /* UIView+Shimmering.swift */,
 			);
