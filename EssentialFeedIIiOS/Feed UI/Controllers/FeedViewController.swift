@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import EssentialFeedII
 
 public final class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching {
     private var refreshController: FeedRefreshViewController?
