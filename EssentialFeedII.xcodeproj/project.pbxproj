@@ -267,10 +267,17 @@
 		C6492C572A99F56D00A993DF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C6492C5C2A9CF08E00A993DF /* Feed Presentation */ = {
+			isa = PBXGroup;
+			children = (
 				C6492C582A99F58E00A993DF /* FeedViewModel.swift */,
 				C6492C5A2A9BF19300A993DF /* FeedImageViewModel.swift */,
 			);
-			path = Models;
+			path = "Feed Presentation";
 			sourceTree = "<group>";
 		};
 		C67392BA2A94C4920083DF75 /* Feed UI */ = {
@@ -354,6 +361,7 @@
 		C67503B029B32C9C0030D5F5 /* EssentialFeedIIiOS */ = {
 			isa = PBXGroup;
 			children = (
+				C6492C5C2A9CF08E00A993DF /* Feed Presentation */,
 				C67392BE2A94C52A0083DF75 /* Feed Image Loader */,
 				C67392BA2A94C4920083DF75 /* Feed UI */,
 			);
