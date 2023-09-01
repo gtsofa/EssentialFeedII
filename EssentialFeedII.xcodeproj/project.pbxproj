@@ -264,13 +264,6 @@
 			path = "Feed Feature";
 			sourceTree = "<group>";
 		};
-		C6492C572A99F56D00A993DF /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		C6492C5C2A9CF08E00A993DF /* Feed Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,7 +276,6 @@
 		C67392BA2A94C4920083DF75 /* Feed UI */ = {
 			isa = PBXGroup;
 			children = (
-				C6492C572A99F56D00A993DF /* Models */,
 				C6345C672A96092200027D6C /* Composers */,
 				C67392BD2A94C4B40083DF75 /* Views */,
 				C67392BC2A94C4AC0083DF75 /* Controllers */,
