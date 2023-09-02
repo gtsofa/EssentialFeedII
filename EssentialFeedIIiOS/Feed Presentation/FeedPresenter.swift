@@ -8,17 +8,8 @@
 
 import EssentialFeedII
 
-struct FeedLoadingViewModel {
-    let isLoading: Bool
-    
-}
-
 protocol FeedLoadingView {
     func display(_ viewModel: FeedLoadingViewModel)// happens in the uirefreshcontrol
-}
-
-struct FeedViewModel {
-    let feed: [FeedImage]
 }
 
 protocol FeedView {
