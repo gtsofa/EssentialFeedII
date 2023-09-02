@@ -126,6 +126,7 @@ Location</string>
                         <connections>
                             <outlet property="dataSource" destination="LS8-V8-bF1" id="3kn-si-lYe"/>
                             <outlet property="delegate" destination="LS8-V8-bF1" id="yG3-7V-hPw"/>
+                            <outlet property="prefetchDataSource" destination="LS8-V8-bF1" id="8XM-jz-urX"/>
                         </connections>
                     </tableView>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="OZB-Ol-IxL">
