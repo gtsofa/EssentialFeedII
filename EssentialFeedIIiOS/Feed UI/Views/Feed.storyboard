@@ -11,7 +11,7 @@
         <!--Feed View Controller-->
         <scene sceneID="9LS-hd-ib2">
             <objects>
-                <tableViewController id="LS8-V8-bF1" customClass="FeedViewController" customModule="Prototype" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="LS8-V8-bF1" customClass="FeedViewController" customModule="EssentialFeedIIiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="tHh-bW-GO2">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +27,7 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedImageCell" rowHeight="580" id="tLR-bd-Ngb" customClass="FeedImageCell" customModule="Prototype" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedImageCell" rowHeight="580" id="tLR-bd-Ngb" customClass="FeedImageCell" customModule="EssentialFeedIIiOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="66" width="393" height="580"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tLR-bd-Ngb" id="9Hr-qN-Ubj">
@@ -80,6 +80,9 @@ Location</string>
                                                             <buttonConfiguration key="configuration" style="plain" title="↻">
                                                                 <fontDescription key="titleFontDescription" type="system" pointSize="60"/>
                                                             </buttonConfiguration>
+                                                            <connections>
+                                                                <action selector="retryButtonTapped" destination="tLR-bd-Ngb" eventType="touchUpInside" id="pUG-w4-PPq"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -121,6 +124,14 @@ Location</string>
                                         <constraint firstItem="1Zt-AM-I4I" firstAttribute="trailing" secondItem="9Hr-qN-Ubj" secondAttribute="trailingMargin" id="qZe-u2-8Zn"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="descriptionLabel" destination="QTp-v1-tqb" id="cyh-oo-fly"/>
+                                    <outlet property="feedImageContainer" destination="ZLR-aK-sG2" id="bIW-e8-WZx"/>
+                                    <outlet property="feedImageRetryButton" destination="bT2-DS-MLY" id="sET-Ry-CJm"/>
+                                    <outlet property="feedImageView" destination="g9I-5I-NbR" id="1lj-Ul-YNs"/>
+                                    <outlet property="locationContainer" destination="gxB-Cb-OSI" id="PRf-n9-iss"/>
+                                    <outlet property="locationLabel" destination="8Mk-tE-L3s" id="Kp1-k7-38e"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
