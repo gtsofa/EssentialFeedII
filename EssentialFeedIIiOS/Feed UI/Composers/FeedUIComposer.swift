@@ -21,7 +21,7 @@ public final class FeedUIComposer {
         let feedController = storyboard.instantiateInitialViewController() as! FeedViewController//FeedViewController(refreshController: refreshController)
         //set the delegate direct w/o feedrefreshvc
         feedController.delegate = presentationAdapter
-        
+        feedController.title = FeedPresenter.title
         presentationAdapter.presenter = FeedPresenter(
             feedView: FeedViewAdapter(controller: feedController, imageLoader: imageLoader),
             feedLoadingView: WeakRefVirtualProxy(feedController))
