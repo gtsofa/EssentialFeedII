@@ -13,7 +13,7 @@ public final class FeedUIComposer {
     public init() {}
     
     public static func feedComposedWith(feedLoader: FeedLoader, imageLoader: FeedImageDataLoader) -> FeedViewController {
-        let presentationAdapter = FeedLoadPresentationAdapter(feedLoader: MainQueueDispatchDecorator(decoratee: feedLoader))
+        let presentationAdapter = FeedLoaderPresentationAdapter(feedLoader: MainQueueDispatchDecorator(decoratee: feedLoader))
         let feedController = FeedViewController.makeWith(delegate: presentationAdapter, title: FeedPresenter.title)
         
         
@@ -61,30 +61,6 @@ private final class FeedViewAdapter: FeedView {
                 imageTransformer: UIImage.init)
             
             return view
-        }
-    }
-}
-
-private final class FeedLoadPresentationAdapter: FeedViewControllerDelegate {
-    // has loader + presenter dependency
-    private let feedLoader: FeedLoader
-    var  presenter: FeedPresenter?
-    
-    init(feedLoader: FeedLoader) {
-        self.feedLoader = feedLoader
-    }
-    
-    // logic to communicate with feed component
-    func didRequestFeedRefresh() {
-        presenter?.didStartLoadingFeed()
-        
-        feedLoader.load { [weak self] result in
-            switch result {
-            case let .success(feed):
-                self?.presenter?.didFinishLoadingFeed(with: feed)
-            case let .failure(error):
-                self?.presenter?.didFinishLoading(with: error)
-            }
         }
     }
 }
