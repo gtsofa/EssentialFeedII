@@ -56,6 +56,7 @@
 		C6808AC52AA5EB3E00D19558 /* Feed.strings in Resources */ = {isa = PBXBuildFile; fileRef = C6808AC72AA5EB3E00D19558 /* Feed.strings */; };
 		C6808ACC2AA5EDF900D19558 /* FeedLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6808ACB2AA5EDF900D19558 /* FeedLocalizationTests.swift */; };
 		C692A83D29B9D10C00E0408C /* UIView+Shimmering.swift in Sources */ = {isa = PBXBuildFile; fileRef = C692A83C29B9D10C00E0408C /* UIView+Shimmering.swift */; };
+		C69675EA2AAB354A00058674 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69675E92AAB354A00058674 /* ErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +154,7 @@
 		C6808AC92AA5ECDC00D19558 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Feed.strings; sourceTree = "<group>"; };
 		C6808ACB2AA5EDF900D19558 /* FeedLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLocalizationTests.swift; sourceTree = "<group>"; };
 		C692A83C29B9D10C00E0408C /* UIView+Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shimmering.swift"; sourceTree = "<group>"; };
+		C69675E92AAB354A00058674 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +342,7 @@
 				C605EB492AA2121900693DD6 /* Feed.xcassets */,
 				C605EB512AA3DC6800693DD6 /* UITableView+Dequeueing.swift */,
 				C605EB532AA3DEBE00693DD6 /* UIImageView+Animations.swift */,
+				C69675E92AAB354A00058674 /* ErrorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 			files = (
 				C6492C5E2A9D4AF900A993DF /* FeedPresenter.swift in Sources */,
 				C67392C02A94C55B0083DF75 /* FeedImageDataLoader.swift in Sources */,
+				C69675EA2AAB354A00058674 /* ErrorView.swift in Sources */,
 				C692A83D29B9D10C00E0408C /* UIView+Shimmering.swift in Sources */,
 				C605EB522AA3DC6800693DD6 /* UITableView+Dequeueing.swift in Sources */,
 				C67503CF29B52C030030D5F5 /* FeedViewController.swift in Sources */,
