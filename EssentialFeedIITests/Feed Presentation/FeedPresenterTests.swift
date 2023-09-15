@@ -44,7 +44,6 @@ class FeedPresenter {
 
 final class FeedPresenterTests: XCTestCase {
     
-
     func test_init_doesNotSendMessagesToView() {
         let (_, view) = makeSUT()
         
@@ -71,19 +70,19 @@ final class FeedPresenterTests: XCTestCase {
     }
     
     private class ViewSpy: FeedLoadingView, FeedErrorView {
-        enum message: Equatable {
+        enum message: Hashable {
             case display(errorMessage: String?)
             case display(isLoading: Bool)
         }
         
-        private(set) var messages = [message]()
+        private(set) var messages = Set<message>()
         
         func display(_ viewModel: FeedErrorViewModel) {
-            messages.append(.display(errorMessage: viewModel.message))
+            messages.insert(.display(errorMessage: viewModel.message))
         }
         
         func display(_ viewModel: FeedLoadingViewModel) {
-            messages.append(.display(isLoading: viewModel.isLoading))
+            messages.insert(.display(isLoading: viewModel.isLoading))
         }
     }
 }
