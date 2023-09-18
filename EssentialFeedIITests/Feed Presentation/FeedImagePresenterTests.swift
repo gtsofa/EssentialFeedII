@@ -28,7 +28,7 @@ final class FeedImagePresenterTests: XCTestCase {
         return (sut, view)
     }
     
-    class ViewSpy {
+    private class ViewSpy {
         let messages = [Any]()
     }
 
