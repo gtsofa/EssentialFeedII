@@ -25,10 +25,6 @@ public struct LocalFeedImage: Equatable {
     }
 }
 
-public struct FeedLoadingViewModel {
-    public let isLoading: Bool
-}
-
 public protocol FeedLoadingView {
     func display(_ viewModel: FeedLoadingViewModel)// happens in the uirefreshcontrol
 }
