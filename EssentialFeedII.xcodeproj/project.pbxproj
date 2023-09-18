@@ -64,6 +64,7 @@
 		C6AED4D92AB8501D003DFDB7 /* Feed.strings in Resources */ = {isa = PBXBuildFile; fileRef = C6AED4D32AB84B1F003DFDB7 /* Feed.strings */; };
 		C6AED4DB2AB850B1003DFDB7 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AED4DA2AB850B1003DFDB7 /* FeedViewModel.swift */; };
 		C6AED4DD2AB85115003DFDB7 /* FeedLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AED4DC2AB85115003DFDB7 /* FeedLoadingViewModel.swift */; };
+		C6AED4DF2AB8515E003DFDB7 /* FeedErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AED4DE2AB8515E003DFDB7 /* FeedErrorViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +172,7 @@
 		C6AED4D72AB84D34003DFDB7 /* FeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenter.swift; sourceTree = "<group>"; };
 		C6AED4DA2AB850B1003DFDB7 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		C6AED4DC2AB85115003DFDB7 /* FeedLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoadingViewModel.swift; sourceTree = "<group>"; };
+		C6AED4DE2AB8515E003DFDB7 /* FeedErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedErrorViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -457,6 +459,7 @@
 				C6AED4D32AB84B1F003DFDB7 /* Feed.strings */,
 				C6AED4DA2AB850B1003DFDB7 /* FeedViewModel.swift */,
 				C6AED4DC2AB85115003DFDB7 /* FeedLoadingViewModel.swift */,
+				C6AED4DE2AB8515E003DFDB7 /* FeedErrorViewModel.swift */,
 			);
 			path = "Feed Presentation";
 			sourceTree = "<group>";
@@ -682,6 +685,7 @@
 				C63F227D29B0C9CA008B00E7 /* FeedImage.swift in Sources */,
 				C6AED4D82AB84D34003DFDB7 /* FeedPresenter.swift in Sources */,
 				C6AED4DB2AB850B1003DFDB7 /* FeedViewModel.swift in Sources */,
+				C6AED4DF2AB8515E003DFDB7 /* FeedErrorViewModel.swift in Sources */,
 				C6AED4DD2AB85115003DFDB7 /* FeedLoadingViewModel.swift in Sources */,
 				C63F228529B0CB0E008B00E7 /* URLSessionHTTPClient.swift in Sources */,
 			);
