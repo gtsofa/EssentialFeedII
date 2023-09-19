@@ -1,39 +1,50 @@
 //
 //  FeedPresenter.swift
-//  EssentialFeedIIiOS
+//  EssentialFeedII
 //
-//  Created by Julius on 29/08/2023.
+//  Created by Julius on 18/09/2023.
 //
 
-
-import EssentialFeedII
 import Foundation
 
-protocol FeedLoadingView {
-    func display(_ viewModel: FeedLoadingViewModel)// happens in the uirefreshcontrol
-}
-
-protocol FeedView {
+public protocol FeedView {
     func display(_ viewModel: FeedViewModel) // happens in the uitableview
 }
 
-protocol FeedErrorView {
+public struct LocalFeedImage: Equatable {
+    public let id: UUID
+    public let description: String?
+    public let location: String?
+    public let url: URL
+    
+    public init(id: UUID, description: String?, location: String?, url: URL) {
+        self.id = id
+        self.description = description
+        self.location = location
+        self.url = url
+    }
+}
+
+public protocol FeedLoadingView {
+    func display(_ viewModel: FeedLoadingViewModel)// happens in the uirefreshcontrol
+}
+
+public protocol FeedErrorView {
     func display(_ viewModel: FeedErrorViewModel)
 }
 
-final class FeedPresenter {
-    // a presenter must have a view - our design needs refactoring!
+public final class FeedPresenter {
     private let feedView: FeedView
     private let feedLoadingView: FeedLoadingView
     private let errorView: FeedErrorView
     
-    init(feedView: FeedView, feedLoadingView: FeedLoadingView, errorView: FeedErrorView) {
+    public init(feedView: FeedView, feedLoadingView: FeedLoadingView, errorView: FeedErrorView) {
         self.feedView = feedView
         self.feedLoadingView = feedLoadingView
         self.errorView = errorView
     }
     
-    static var title: String {
+    public static var title: String {
         return NSLocalizedString("FEED_VIEW_TITLE",
                                  tableName: "Feed",
                                  bundle: Bundle(for: FeedPresenter.self),
@@ -47,19 +58,18 @@ final class FeedPresenter {
                                  comment: "Error message displayed when we can't load the image feed from the server")
     }
     
-    func didStartLoadingFeed() {
+    public func didStartLoadingFeed() {
         errorView.display(.noError)
         feedLoadingView.display(FeedLoadingViewModel(isLoading: true))
     }
     
-    func didFinishLoadingFeed(with feed: [FeedImage]) {
+    public func didFinishLoadingFeed(with feed: [FeedImage]) {
         feedView.display(FeedViewModel(feed: feed))
         feedLoadingView.display(FeedLoadingViewModel(isLoading: false))
     }
     
-    func didFinishLoading(with error: Error) {
+    public func didFinishLoading(with error: Error) {
         errorView.display(.error(message: feedLoadError))
         feedLoadingView.display(FeedLoadingViewModel(isLoading: false))
     }
-    
 }
