@@ -16,15 +16,37 @@ class LocalFeedLoader {
     }
     
     func save(_ items: [FeedImage]) {
-        store.deleteCacheFeedCallCount += 1
+        store.deleteCacheFeed { [unowned self] error in
+            if error == nil {
+                self.store.insert(items)
+            }
+        }
     }
 }
 
 class FeedStore {
     var deleteCacheFeedCallCount = 0
     var insertCallCount = 0
+    typealias  DeletionCompletion = (Error?) -> Void
     
-    func completeDeletion(with error: Error, at index: Int = 0) {}
+    private var deletionCompletions = [DeletionCompletion]()
+    
+    func deleteCacheFeed(completion: @escaping DeletionCompletion) {
+        deleteCacheFeedCallCount += 1
+        deletionCompletions.append(completion)
+    }
+    
+    func insert(_ items: [FeedImage]) {
+        insertCallCount += 1
+    }
+    
+    func completeDeletion(with error: Error, at index: Int = 0) {
+        deletionCompletions[index](error)
+    }
+    
+    func completeDeletionSuccessfully(at index: Int = 0) {
+        deletionCompletions[index](nil)
+    }
 }
 
 final class CacheFeedUseCaseTests: XCTestCase {
@@ -55,6 +77,16 @@ final class CacheFeedUseCaseTests: XCTestCase {
         XCTAssertEqual(store.insertCallCount, 0)
     }
     
+    func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() {
+        let (sut, store) = makeSUT()
+        let items = [uniqueItem(), uniqueItem()]
+        
+        sut.save(items)
+        store.completeDeletionSuccessfully()
+        
+        XCTAssertEqual(store.insertCallCount, 1)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalFeedLoader, store: FeedStore) {
@@ -64,6 +96,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, store)
     }
+    
     private func uniqueItem() -> FeedImage {
         return FeedImage(id: UUID(), description: "any", location: "any", url: anyURL())
     }
