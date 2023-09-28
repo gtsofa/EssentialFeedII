@@ -51,7 +51,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT()
         let deletionError = anyNSError()
         
-        expect(sut, toCompleteWithError: deletionError, when: {
+        expect(sut, toCompleteWith: deletionError, when: {
             store.completeDeletion(with: deletionError)
         })
     }
@@ -60,7 +60,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT()
         let insertionError = anyNSError()
         
-        expect(sut, toCompleteWithError: insertionError, when:  {
+        expect(sut, toCompleteWith: insertionError, when:  {
             store.completeDeletionSuccessfully()
             store.completeInsertion(with: insertionError)
         })
@@ -69,7 +69,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
     func test_save_succeedsOnSuccessfulCacheInsertion() {
         let (sut, store) = makeSUT()
         
-        expect(sut, toCompleteWithError: nil, when: {
+        expect(sut, toCompleteWith: nil, when: {
             store.completeDeletionSuccessfully()
             store.completeInsertionSuccessfully()
         })
@@ -115,12 +115,12 @@ final class CacheFeedUseCaseTests: XCTestCase {
         return (sut, store)
     }
     
-    private func expect(_ sut: LocalFeedLoader, toCompleteWithError expectedError: NSError?, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line ) {
+    private func expect(_ sut: LocalFeedLoader, toCompleteWith expectedError: NSError?, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line ) {
         let exp = expectation(description: "wait for save completion")
         
-        var receivedError: Error?
+        var receivedResults = [LocalFeedLoader.SaveResult]()
         sut.save([uniqueItem()]) { error in
-            receivedError = error
+            receivedResults.append(error)
             exp.fulfill()
         }
         
@@ -128,7 +128,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
         action()
         wait(for: [exp], timeout: 1.0)
         
-        XCTAssertEqual(receivedError as NSError?, expectedError, file: file, line: line)
+        XCTAssertEqual(receivedResults.map { $0 as NSError? }, [expectedError], file: file, line: line)
     }
     
     private func uniqueItem() -> FeedImage {
