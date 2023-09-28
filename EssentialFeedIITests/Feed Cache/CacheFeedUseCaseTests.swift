@@ -8,36 +8,6 @@
 import XCTest
 import EssentialFeedII
 
-class LocalFeedLoader {
-    private let store: FeedStore
-    private let currentDate: () -> Date
-    
-    init(store: FeedStore, currentDate: @escaping () -> Date) {
-        self.store = store
-        self.currentDate = currentDate
-    }
-    
-    func save(_ items: [FeedImage], completion: @escaping (Error?) -> Void) {
-        store.deleteCacheFeed { [unowned self] error in
-            if error == nil {
-                self.store.insert(items, timestamp: self.currentDate(), completion: { error in
-                    completion(error)
-                })
-            } else {
-                completion(error)
-            }
-        }
-    }
-}
-
-protocol FeedStore {
-    typealias  DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
-    
-    func deleteCacheFeed(completion: @escaping DeletionCompletion)
-    func insert(_ items: [FeedImage], timestamp: Date, completion: @escaping InsertionCompletion)
-}
-
 final class CacheFeedUseCaseTests: XCTestCase {
     
     func test_init_doesNotMessageStoreUponCreation() {
@@ -81,7 +51,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT()
         let deletionError = anyNSError()
         
-        expect(sut, toCompleteWithError: deletionError, when: {
+        expect(sut, toCompleteWith: deletionError, when: {
             store.completeDeletion(with: deletionError)
         })
     }
@@ -90,7 +60,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT()
         let insertionError = anyNSError()
         
-        expect(sut, toCompleteWithError: insertionError, when:  {
+        expect(sut, toCompleteWith: insertionError, when:  {
             store.completeDeletionSuccessfully()
             store.completeInsertion(with: insertionError)
         })
@@ -99,10 +69,40 @@ final class CacheFeedUseCaseTests: XCTestCase {
     func test_save_succeedsOnSuccessfulCacheInsertion() {
         let (sut, store) = makeSUT()
         
-        expect(sut, toCompleteWithError: nil, when: {
+        expect(sut, toCompleteWith: nil, when: {
             store.completeDeletionSuccessfully()
             store.completeInsertionSuccessfully()
         })
+    }
+    
+    func test_save_doesNotDeliverDeletionErrorAfterSUTInstanceHasBeenDeallocated() {
+        let store = FeedStoreSpy()
+        let timestamp = Date()
+        var sut: LocalFeedLoader? = LocalFeedLoader(store: store, currentDate: { timestamp })
+        
+        var receivedResults = [LocalFeedLoader.SaveResult]()
+        sut?.save([uniqueItem()]) { receivedResults.append($0) }
+        
+        sut = nil
+        
+        store.completeDeletion(with: anyNSError())
+        XCTAssertTrue(receivedResults.isEmpty)
+    }
+    
+    func test_save_doesNotDeliverInsertionErrorAfterSUTInstanceHasBeenDeallocated() {
+        let store = FeedStoreSpy()
+        let timestamp = Date()
+        var sut: LocalFeedLoader? = LocalFeedLoader(store: store, currentDate: { timestamp })
+        
+        var receivedResults = [LocalFeedLoader.SaveResult]()
+        sut?.save([uniqueItem()]) { receivedResults.append($0) }
+        
+        store.completeDeletionSuccessfully()
+        
+        sut = nil
+        store.completeInsertion(with: anyNSError())
+        
+        XCTAssertTrue(receivedResults.isEmpty)
     }
     
     // MARK: - Helpers
@@ -115,12 +115,12 @@ final class CacheFeedUseCaseTests: XCTestCase {
         return (sut, store)
     }
     
-    private func expect(_ sut: LocalFeedLoader, toCompleteWithError expectedError: NSError?, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line ) {
+    private func expect(_ sut: LocalFeedLoader, toCompleteWith expectedError: NSError?, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line ) {
         let exp = expectation(description: "wait for save completion")
         
-        var receivedError: Error?
+        var receivedResults = [LocalFeedLoader.SaveResult]()
         sut.save([uniqueItem()]) { error in
-            receivedError = error
+            receivedResults.append(error)
             exp.fulfill()
         }
         
@@ -128,7 +128,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
         action()
         wait(for: [exp], timeout: 1.0)
         
-        XCTAssertEqual(receivedError as NSError?, expectedError, file: file, line: line)
+        XCTAssertEqual(receivedResults.map { $0 as NSError? }, [expectedError], file: file, line: line)
     }
     
     private func uniqueItem() -> FeedImage {
