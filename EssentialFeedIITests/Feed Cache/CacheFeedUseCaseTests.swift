@@ -22,9 +22,10 @@ class LocalFeedLoader {
             guard let self = self else { return }
             
             if error == nil {
-                self.store.insert(items, timestamp: self.currentDate(), completion: { error in
+                self.store.insert(items, timestamp: self.currentDate()) { [weak self] error in
+                    guard self != nil else { return }
                     completion(error)
-                })
+                }
             } else {
                 completion(error)
             }
@@ -118,6 +119,22 @@ final class CacheFeedUseCaseTests: XCTestCase {
         sut = nil
         
         store.completeDeletion(with: anyNSError())
+        XCTAssertTrue(receivedResult.isEmpty)
+    }
+    
+    func test_save_doesNotDeliverInsertionErrorAfterSUTInstanceHasBeenDeallocated() {
+        let store = FeedStoreSpy()
+        let timestamp = Date()
+        var sut: LocalFeedLoader? = LocalFeedLoader(store: store, currentDate: { timestamp })
+        
+        var receivedResult = [Error?]()
+        sut?.save([uniqueItem()]) { receivedResult.append($0) }
+        
+        store.completeDeletionSuccessfully()
+        
+        sut = nil
+        store.completeInsertion(with: anyNSError())
+        
         XCTAssertTrue(receivedResult.isEmpty)
     }
     
