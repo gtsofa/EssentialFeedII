@@ -17,6 +17,7 @@ public final class LocalFeedLoader {
     }
     
     public typealias SaveResult = Error?
+    public typealias LoadResult = FeedLoader.Result
     
     public func save(_ items: [FeedImage], completion: @escaping (SaveResult) -> Void) {
         store.deleteCacheFeed { [weak self] error in
@@ -38,9 +39,11 @@ public final class LocalFeedLoader {
         }
     }
     
-    public func load(completion: @escaping (Error?) -> Void) {
+    public func load(completion: @escaping (LoadResult) -> Void) {
         store.retrieve { error in
-            completion(error)
+            if let error = error {
+                completion(.failure(error))
+            }
         }
     }
 }
