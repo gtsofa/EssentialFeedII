@@ -75,19 +75,34 @@ Given the customer doesn't have connectivity
 ### Load Feed From Cache Use Case
 
 #### Primary course:
-1. Execute "Load Feed Items" command with above data.
-2. System fetches feed data from cache.
+1. Execute "Load Feed Image" command with above data.
+2. System retrieves feed data from cache.
 3. System validates cache is less than seven days old.
 4. System creates feed items from cached data.
-5. System delivers feed items.
+5. System delivers feed images.
 
-#### Error course (sad path):
+#### Retrieval course (sad path):
 1. System delivers error.
 
 #### Expired cache course (sad path):
-1. System deletes cache.
-2. System delivers no feed items.
+1. System delivers no feed images.
 
+#### Empty cache course (sad path):
+1. System delivers no feed images.
+
+
+### Validate Feed From Cache Use Case
+
+#### Primary course:
+1. Execute "Validate" command with above data.
+2. System retrieves feed data from cache.
+3. System validates cache is less than seven days old.
+
+#### Retrieval course (sad path):
+1. System deletes cache
+
+#### Expired cache course (sad path):
+1. System deletes cache.
 
 ### Cache Feed Use Case
 
