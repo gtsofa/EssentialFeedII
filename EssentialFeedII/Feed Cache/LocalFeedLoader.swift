@@ -17,8 +17,20 @@ public final class LocalFeedLoader {
         self.currentDate = currentDate
     }
     
+    private var maxCacheAgeInDays: Int {
+        return 7
+    }
+    
+    private func validate(_ timestamp: Date) -> Bool {
+        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else { return false }
+        
+        return currentDate() < maxCacheAge
+    }
+    
+}
+
+extension LocalFeedLoader {
     public typealias SaveResult = Error?
-    public typealias LoadResult = FeedLoader.Result
     
     public func save(_ items: [FeedImage], completion: @escaping (SaveResult) -> Void) {
         store.deleteCacheFeed { [weak self] error in
@@ -40,36 +52,46 @@ public final class LocalFeedLoader {
         }
     }
     
+}
+
+extension LocalFeedLoader: FeedLoader {
+    public typealias LoadResult = FeedLoader.Result
+    
     public func load(completion: @escaping (LoadResult) -> Void) {
         store.retrieve { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case let .failure(error):
-                self.store.deleteCacheFeed { _ in }
                 completion(.failure(error))
                 
             case let .found(feed, timestamp) where self.validate(timestamp):
                 completion(.success(feed.toModels()))
                 
-            case .found:
-                self.store.deleteCacheFeed { _ in }
-                completion(.success([]))
-                
-            case .empty:
+            case .found, .empty:
                 completion(.success([]))
             }
         }
     }
     
-    private var maxCacheAgeInDays: Int {
-        return 7
-    }
-    
-    private func validate(_ timestamp: Date) -> Bool {
-        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else { return false }
-        
-        return currentDate() < maxCacheAge
+}
+
+extension LocalFeedLoader {
+    public func validateCache() {
+        store.retrieve { [ weak self ] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .failure:
+                self.store.deleteCacheFeed { _ in }
+                
+            case let .found(_, timestamp: timestamp) where !self.validate(timestamp):
+                self.store.deleteCacheFeed { _ in }
+                
+            case .empty, .found:
+                break
+            }
+        }
     }
 }
 
