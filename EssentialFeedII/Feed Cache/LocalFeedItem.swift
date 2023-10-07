@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct LocalFeedItem: Hashable {
+public struct LocalFeedItem: Hashable, Codable {
     public let id: UUID
     public let description: String?
     public let location: String?
