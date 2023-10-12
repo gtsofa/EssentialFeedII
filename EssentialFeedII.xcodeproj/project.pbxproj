@@ -507,6 +507,7 @@
 		C6ABF6932AD7DCDC006E2E43 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				C6C440572AD2A576001B87A3 /* CodableFeedStore.swift */,
 				C6ABF6942AD7DD06006E2E43 /* CoreData */,
 			);
 			path = Infrastructure;
@@ -543,7 +544,6 @@
 				C6E3F3C42AC590D7008DAA33 /* FeedStore.swift */,
 				C65E84E32AC6D3BE00380354 /* LocalFeedItem.swift */,
 				C649696F2ACC343B00439A62 /* FeedCachePolicy.swift */,
-				C6C440572AD2A576001B87A3 /* CodableFeedStore.swift */,
 			);
 			path = "Feed Cache";
 			sourceTree = "<group>";
