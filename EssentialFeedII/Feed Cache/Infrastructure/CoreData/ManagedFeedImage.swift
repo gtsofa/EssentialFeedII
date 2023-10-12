@@ -15,6 +15,12 @@ class ManagedFeedImage: NSManagedObject {
     @NSManaged var url: URL
     @NSManaged var cache: ManagedCache
     
+    var local: LocalFeedItem {
+        return LocalFeedItem(id: id, description: imageDescription, location: location, url: url)
+    }
+}
+
+extension ManagedFeedImage {
     static func images(from localFeed: [LocalFeedItem], in context: NSManagedObjectContext) -> NSOrderedSet {
         return NSOrderedSet(array: localFeed.map { local in
             let managed = ManagedFeedImage(context: context)
@@ -25,9 +31,5 @@ class ManagedFeedImage: NSManagedObject {
             
             return managed
         })
-    }
-    
-    var local: LocalFeedItem {
-        return LocalFeedItem(id: id, description: imageDescription, location: location, url: url)
     }
 }
