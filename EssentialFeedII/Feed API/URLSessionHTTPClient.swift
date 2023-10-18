@@ -24,12 +24,12 @@ public final class URLSessionHTTPClient: HTTPClient {
         }
     }
     
-    public func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) -> HTTPClientTask {
+    public func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask {
         let task = session.dataTask(with: url) {data,  responnse, error in
             if let error = error {
                 completion(.failure(error))
             } else if let data = data, let responnse = responnse as? HTTPURLResponse {
-                completion(.success(data, responnse))
+                completion(.success((data, responnse)))
                 
             } else {
                 completion(.failure(UnexpectedValuesRepresentation()))
