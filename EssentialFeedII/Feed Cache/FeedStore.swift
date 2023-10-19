@@ -7,7 +7,7 @@
 
 import Foundation
 
-public typealias CachedFeed =  (feed: [LocalFeedItem], timestamp: Date)
+public typealias CachedFeed = (feed: [LocalFeedItem], timestamp: Date)
 
 public protocol FeedStore {
     typealias DeletionResult = Result<Void, Error>
