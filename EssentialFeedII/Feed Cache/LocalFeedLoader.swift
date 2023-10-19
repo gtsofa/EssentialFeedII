@@ -19,16 +19,17 @@ public final class LocalFeedLoader {
 }
 
 extension LocalFeedLoader {
-    public typealias SaveResult = Error?
+    public typealias SaveResult = Result<Void, Error>
     
     public func save(_ items: [FeedImage], completion: @escaping (SaveResult) -> Void) {
-        store.deleteCacheFeed { [weak self] error in
+        store.deleteCacheFeed { [weak self] deletionResult in
             guard let self = self else { return }
             
-            if let cacheDeletionError = error {
-                completion(cacheDeletionError)
-            } else {
+            switch deletionResult {
+            case .success:
                 self.cache(items, with: completion)
+            case let .failure(error):
+                completion(.failure(error))
             }
         }
     }
@@ -54,10 +55,10 @@ extension LocalFeedLoader: FeedLoader {
             case let .failure(error):
                 completion(.failure(error))
                 
-            case let .found(feed, timestamp) where FeedCachePolicy.validate(timestamp, against: self.currentDate()):
-                completion(.success(feed.toModels()))
+            case let .success(.some(cache)) where FeedCachePolicy.validate(cache.timestamp, against: self.currentDate()):
+                completion(.success(cache.feed.toModels()))
                 
-            case .found, .empty:
+            case .success:
                 completion(.success([]))
             }
         }
@@ -74,10 +75,10 @@ extension LocalFeedLoader {
             case .failure:
                 self.store.deleteCacheFeed { _ in }
                 
-            case let .found(_, timestamp: timestamp) where !FeedCachePolicy.validate(timestamp, against: self.currentDate()):
+            case let .success(.some(cache)) where !FeedCachePolicy.validate(cache.timestamp, against: self.currentDate()):
                 self.store.deleteCacheFeed { _ in }
                 
-            case .empty, .found:
+            case .success:
                 break
             }
         }
