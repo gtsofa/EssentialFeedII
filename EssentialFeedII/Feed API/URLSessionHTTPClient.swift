@@ -26,15 +26,16 @@ public final class URLSessionHTTPClient: HTTPClient {
     
     public func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask {
         let task = session.dataTask(with: url) {data,  responnse, error in
-            if let error = error {
-                completion(.failure(error))
-            } else if let data = data, let responnse = responnse as? HTTPURLResponse {
-                completion(.success((data, responnse)))
-                
-            } else {
-                completion(.failure(UnexpectedValuesRepresentation()))
-            }
-            
+            completion(Result {
+                if let error = error {
+                    throw error
+                } else if let data = data, let responnse = responnse as? HTTPURLResponse {
+                    return (data, responnse)
+                    
+                } else {
+                    throw UnexpectedValuesRepresentation()
+                }
+            })
         }
         task.resume()
         return URLSessionTaskWrapper(wrapped: task)
