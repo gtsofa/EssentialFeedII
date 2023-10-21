@@ -50,7 +50,7 @@ public final class RemoteFeedImageDataLoader: FeedImageDataLoader {
             guard self != nil else { return }
             
             switch result {
-            case let .success(data, response):
+            case let .success((data, response)):
                 if response.isOK, !data.isEmpty {
                     task.complete(with: .success(data))
                 } else {
