@@ -38,7 +38,7 @@ final class LocalFeedImageDataLoaderUseCaseTests: XCTestCase {
     
     func test_loadImageDataFromURL_requestsDataForURL() {
         let (sut, store) = makeSUT()
-        let url = URL(string: "https://any-url.com")!
+        let url = anyURL()
         
         _ = sut.loadImageData(from: url) { _ in }
         
