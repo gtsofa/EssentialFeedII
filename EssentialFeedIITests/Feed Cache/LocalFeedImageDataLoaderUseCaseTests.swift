@@ -42,7 +42,6 @@ final class LocalFeedImageDataLoaderUseCaseTests: XCTestCase {
         
         _ = sut.loadImageData(from: url) { _ in }
         
-        
         XCTAssertEqual(store.receivedMessages, [.retrieve(dataFor: url)])
     }
     
