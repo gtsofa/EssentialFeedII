@@ -8,7 +8,7 @@
 import XCTest
 import EssentialFeedII
 
-final class LocalFeedImageDataLoaderUseCaseTests: XCTestCase {
+final class LoadFeedImageDataFromCacheUseCaseTests: XCTestCase {
     func test_init_doesNotMessageStoreUponCreation() {
         let (_, store) = makeSUT()
         
