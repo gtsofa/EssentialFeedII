@@ -28,7 +28,7 @@ final class URLSessionHTTPClientTests: XCTestCase {
             exp.fulfill()
         }
         
-        makeSUT().get(from: url) { _ in }
+        _  = makeSUT().get(from: url) { _ in }
         
         wait(for: [exp], timeout: 1.0)
     }
