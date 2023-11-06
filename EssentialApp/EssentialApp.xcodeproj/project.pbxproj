@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C6393F3D2AF8E72C00213102 /* FeedLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6393F3C2AF8E72B00213102 /* FeedLoaderWithFallbackCompositeTests.swift */; };
+		C6393F3F2AF8F92800213102 /* FeedLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6393F3E2AF8F92800213102 /* FeedLoaderWithFallbackComposite.swift */; };
 		C6A1FB1D2AC0B33E0035E91C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A1FB1C2AC0B33E0035E91C /* AppDelegate.swift */; };
 		C6A1FB1F2AC0B33E0035E91C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A1FB1E2AC0B33E0035E91C /* SceneDelegate.swift */; };
 		C6A1FB212AC0B33E0035E91C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A1FB202AC0B33E0035E91C /* ViewController.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		C6393F3C2AF8E72B00213102 /* FeedLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
+		C6393F3E2AF8F92800213102 /* FeedLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
 		C6A1FB192AC0B33E0035E91C /* EssentialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EssentialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A1FB1C2AC0B33E0035E91C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6A1FB1E2AC0B33E0035E91C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				C6A1FB252AC0B3440035E91C /* Assets.xcassets */,
 				C6A1FB272AC0B3440035E91C /* LaunchScreen.storyboard */,
 				C6A1FB2A2AC0B3440035E91C /* Info.plist */,
+				C6393F3E2AF8F92800213102 /* FeedLoaderWithFallbackComposite.swift */,
 			);
 			path = EssentialApp;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			files = (
 				C6A1FB212AC0B33E0035E91C /* ViewController.swift in Sources */,
 				C6A1FB1D2AC0B33E0035E91C /* AppDelegate.swift in Sources */,
+				C6393F3F2AF8F92800213102 /* FeedLoaderWithFallbackComposite.swift in Sources */,
 				C6A1FB1F2AC0B33E0035E91C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
