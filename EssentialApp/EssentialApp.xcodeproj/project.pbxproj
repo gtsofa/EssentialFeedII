@@ -23,6 +23,7 @@
 		C6A1FB532AC0B59B0035E91C /* EssentialFeedIIiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C6A1FB512AC0B59B0035E91C /* EssentialFeedIIiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C6F229C32AFA720B008D64D9 /* FeedImageDataLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F229C22AFA720B008D64D9 /* FeedImageDataLoaderWithFallbackComposite.swift */; };
 		C6F229C62AFA72E9008D64D9 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F229C52AFA72E9008D64D9 /* XCTestCase+MemoryLeakTracking.swift */; };
+		C6F229C82AFA73EE008D64D9 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F229C72AFA73EE008D64D9 /* SharedTestHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		C6A1FB512AC0B59B0035E91C /* EssentialFeedIIiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EssentialFeedIIiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6F229C22AFA720B008D64D9 /* FeedImageDataLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
 		C6F229C52AFA72E9008D64D9 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
+		C6F229C72AFA73EE008D64D9 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				C6F229C52AFA72E9008D64D9 /* XCTestCase+MemoryLeakTracking.swift */,
+				C6F229C72AFA73EE008D64D9 /* SharedTestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 			files = (
 				C6393F3D2AF8E72C00213102 /* FeedLoaderWithFallbackCompositeTests.swift in Sources */,
 				C6F229C62AFA72E9008D64D9 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
+				C6F229C82AFA73EE008D64D9 /* SharedTestHelpers.swift in Sources */,
 				C6393F412AF8FA4400213102 /* FeedImageDataLoaderWithFallbackCompositeTests.swift in Sources */,
 				C6A1FB342AC0B3450035E91C /* EssentialAppTests.swift in Sources */,
 			);
