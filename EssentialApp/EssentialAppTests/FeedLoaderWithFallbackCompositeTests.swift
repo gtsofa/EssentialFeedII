@@ -9,14 +9,14 @@ import XCTest
 import EssentialFeedII
 import EssentialApp
 
-final class FeedLoaderWithFallbackCompositeTests: XCTestCase {
+final class FeedLoaderWithFallbackCompositeTests: XCTestCase, FeedLoaderTestCase {
     func test_load_deliversPrimaryFeedOnPrimayLoaderSuccess() {
         let primaryFeed = uniqueFeed()
         let fallbackFeed = uniqueFeed()
         
         let sut = makeSUT(primaryResult: .success(primaryFeed), fallbackResult: .success(fallbackFeed))
         
-        expect(sut: sut, toCompleteWith: .success(primaryFeed))
+        expect(sut, toCompleteWith: .success(primaryFeed))
     }
     
     func test_load_deliversFallbackFeedOnPrimayFailure() {
@@ -24,13 +24,13 @@ final class FeedLoaderWithFallbackCompositeTests: XCTestCase {
         
         let sut = makeSUT(primaryResult: .failure(anyNSError()), fallbackResult: .success(fallbackFeed))
         
-        expect(sut: sut, toCompleteWith: .success(fallbackFeed))
+        expect(sut, toCompleteWith: .success(fallbackFeed))
     }
     
     func test_load_deliversErrorOnBothPrimaryAndFallbackLoaderFailure() {
         let sut = makeSUT(primaryResult: .failure(anyNSError()), fallbackResult: .failure(anyNSError()))
         
-        expect(sut: sut, toCompleteWith: .failure(anyNSError()))
+        expect(sut, toCompleteWith: .failure(anyNSError()))
     }
     
     // MARK: - Helpers
@@ -43,24 +43,5 @@ final class FeedLoaderWithFallbackCompositeTests: XCTestCase {
         trackForMemoryLeaks(fallbackLoader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
-    }
-    
-    private func expect(sut: FeedLoader, toCompleteWith expectedResult: FeedLoader.Result, file: StaticString = #filePath, line: UInt = #line) {
-        let exp = expectation(description: "Wait for load completion")
-        
-        sut.load { receivedResult in
-            switch (receivedResult, expectedResult) {
-            case let (.success(receivedFeed), .success(expectedFeed)):
-                XCTAssertEqual(receivedFeed, expectedFeed, file: file, line: line)
-                
-            case (.failure, .failure):
-                break
-                
-            default:
-                XCTFail("Expected \(expectedResult), got \(receivedResult) instead", file: file, line: line)
-            }
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
     }
 }
