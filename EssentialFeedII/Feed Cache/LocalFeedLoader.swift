@@ -18,7 +18,7 @@ public final class LocalFeedLoader {
     
 }
 
-extension LocalFeedLoader {
+extension LocalFeedLoader: FeedCache {
     public typealias SaveResult = Result<Void, Error>
     
     public func save(_ items: [FeedImage], completion: @escaping (SaveResult) -> Void) {
