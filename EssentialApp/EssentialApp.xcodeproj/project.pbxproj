@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C60635E62AFE2C9A0072BA0F /* FeedImageDataLoaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60635E52AFE2C9A0072BA0F /* FeedImageDataLoaderSpy.swift */; };
 		C62F27D22AFCF6D1008FF403 /* FeedLoaderCacheDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62F27D12AFCF6D1008FF403 /* FeedLoaderCacheDecorator.swift */; };
 		C62F27D42AFCF965008FF403 /* FeedImageDataLoaderCacheDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62F27D32AFCF965008FF403 /* FeedImageDataLoaderCacheDecoratorTests.swift */; };
 		C6393F3D2AF8E72C00213102 /* FeedLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6393F3C2AF8E72B00213102 /* FeedLoaderWithFallbackCompositeTests.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C60635E52AFE2C9A0072BA0F /* FeedImageDataLoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderSpy.swift; sourceTree = "<group>"; };
 		C62F27D12AFCF6D1008FF403 /* FeedLoaderCacheDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderCacheDecorator.swift; sourceTree = "<group>"; };
 		C62F27D32AFCF965008FF403 /* FeedImageDataLoaderCacheDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderCacheDecoratorTests.swift; sourceTree = "<group>"; };
 		C6393F3C2AF8E72B00213102 /* FeedLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				C6F229C72AFA73EE008D64D9 /* SharedTestHelpers.swift */,
 				C67336C42AFCDC7700B37A7D /* FeedLoaderStub.swift */,
 				C67336C62AFCDEE500B37A7D /* XCTestCase+FeedLoader.swift */,
+				C60635E52AFE2C9A0072BA0F /* FeedImageDataLoaderSpy.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				C62F27D42AFCF965008FF403 /* FeedImageDataLoaderCacheDecoratorTests.swift in Sources */,
 				C6F229C82AFA73EE008D64D9 /* SharedTestHelpers.swift in Sources */,
 				C6393F412AF8FA4400213102 /* FeedImageDataLoaderWithFallbackCompositeTests.swift in Sources */,
+				C60635E62AFE2C9A0072BA0F /* FeedImageDataLoaderSpy.swift in Sources */,
 				C6A1FB342AC0B3450035E91C /* EssentialAppTests.swift in Sources */,
 				C67336C32AFCD63100B37A7D /* FeedLoaderCacheDecoratorTests.swift in Sources */,
 			);
