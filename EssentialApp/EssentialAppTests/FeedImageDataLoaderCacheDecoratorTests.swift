@@ -8,12 +8,6 @@
 import XCTest
 import EssentialFeedII
 
-protocol FeedImageDataCache {
-    typealias Result = Swift.Result<Void, Error>
-    
-    func save(_ data: Data, for url: URL, completion: @escaping (Result) -> Void)
-}
-
 class FeedImageDataLoaderCacheDecorator: FeedImageDataLoader {
     let decoratee: FeedImageDataLoader
     private let cache: FeedImageDataCache
@@ -91,7 +85,6 @@ final class FeedImageDataLoaderCacheDecoratorTests: XCTestCase, FeedImageDataLoa
     func test_loadImageData_doesNotCacheDataOnLoaderFailure() {
         let cache = CacheSpy()
         let url = anyURL()
-        let imageData = anyData()
         let (sut, loader) = makeSUT(cache: cache)
         
         _ = sut.loadImageData(from: url) { _ in }
