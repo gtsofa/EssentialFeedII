@@ -5,8 +5,8 @@
 //  Created by Julius on 05/09/2023.
 //
 
-import Foundation
 import EssentialFeedII
+import EssentialFeedIIiOS
 
 final class FeedLoaderPresentationAdapter: FeedViewControllerDelegate {
     // has loader + presenter dependency
