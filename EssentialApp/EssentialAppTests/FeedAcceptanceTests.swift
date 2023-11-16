@@ -12,14 +12,7 @@ import EssentialFeedIIiOS
 
 final class FeedAcceptanceTests: XCTestCase {
     func test_onLaunch_displaysRemoteFeedWhenCustomerHasConnectivity() {
-        let store = InMemoryFeedStore.empty
-        let httpClient = HTTPClientStub.online(response)
-        let sut = SceneDelegate(httpClient: httpClient, store: store)
-        sut.window = UIWindow()
-        sut.configureWindow()
-        
-        let nav = sut.window?.rootViewController as? UINavigationController
-        let feed = nav?.topViewController as! FeedViewController
+        let feed = launch(httpClient: .online(response), store: .empty)
         
         XCTAssertEqual(feed.numberOfRenderedFeedImageViews(), 2)
         XCTAssertNotNil(feed.simulateFeedImageViewVisible(at: 0)?.renderedImage)
@@ -36,6 +29,17 @@ final class FeedAcceptanceTests: XCTestCase {
     }
     
     // MARK: - Helpers
+    
+    private func launch(httpClient: HTTPClientStub = .offline, store: InMemoryFeedStore = .empty) -> FeedViewController {
+        let store = InMemoryFeedStore.empty
+        let httpClient = HTTPClientStub.online(response)
+        let sut = SceneDelegate(httpClient: httpClient, store: store)
+        sut.window = UIWindow()
+        sut.configureWindow()
+        
+        let nav = sut.window?.rootViewController as? UINavigationController
+        return nav?.topViewController as! FeedViewController
+    }
     
     private class HTTPClientStub: HTTPClient {
         private class Task: HTTPClientTask {
