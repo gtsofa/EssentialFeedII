@@ -15,7 +15,7 @@ final class FeedAcceptanceTests: XCTestCase {
         let feed = launch(httpClient: .online(response), store: .empty)
         
         XCTAssertEqual(feed.numberOfRenderedFeedImageViews(), 2)
-        XCTAssertNotNil(feed.simulateFeedImageViewVisible(at: 0)?.renderedImage)
+        XCTAssertNotNil(feed.renderedFeedImageData(at: 0))
         XCTAssertNotNil(feed.simulateFeedImageViewVisible(at: 1)?.renderedImage)
     
     }
