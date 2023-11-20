@@ -1,8 +1,8 @@
 //
 //  FeedSnapshotTests.swift
-//  EssentialFeedIITests
+//  EssentialFeedIIiOSTests
 //
-//  Created by Julius on 18/11/2023.
+//  Created by Julius on 20/11/2023.
 //
 
 import XCTest
@@ -236,18 +236,5 @@ struct SnapshotConfiguration {
                 .init(displayGamut: .P3),
                 .init(userInterfaceStyle: style)
             ]))
-    }
-}
-
-extension UIImage {
-    static func make(withColor color: UIColor) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()!
-        context.setFillColor(color.cgColor)
-        context.fill(rect)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img!
     }
 }
