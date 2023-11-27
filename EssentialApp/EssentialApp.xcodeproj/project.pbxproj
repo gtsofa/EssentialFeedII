@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C60839102B14D28E0058DB81 /* CombineHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C608390F2B14D28E0058DB81 /* CombineHelpers.swift */; };
 		C67336C52AFCDC7700B37A7D /* FeedLoaderStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67336C42AFCDC7700B37A7D /* FeedLoaderStub.swift */; };
 		C67336C72AFCDEE500B37A7D /* XCTestCase+FeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67336C62AFCDEE500B37A7D /* XCTestCase+FeedLoader.swift */; };
 		C6770EB42B036CD500E3DEA4 /* SceneDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6770EB32B036CD500E3DEA4 /* SceneDelegateTests.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C608390F2B14D28E0058DB81 /* CombineHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineHelpers.swift; sourceTree = "<group>"; };
 		C67336C42AFCDC7700B37A7D /* FeedLoaderStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderStub.swift; sourceTree = "<group>"; };
 		C67336C62AFCDEE500B37A7D /* XCTestCase+FeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FeedLoader.swift"; sourceTree = "<group>"; };
 		C6770EB32B036CD500E3DEA4 /* SceneDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateTests.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				C6A1FB252AC0B3440035E91C /* Assets.xcassets */,
 				C6A1FB272AC0B3440035E91C /* LaunchScreen.storyboard */,
 				C6A1FB2A2AC0B3440035E91C /* Info.plist */,
+				C608390F2B14D28E0058DB81 /* CombineHelpers.swift */,
 			);
 			path = EssentialApp;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			files = (
 				C6770EBD2B0374B600E3DEA4 /* FeedLoaderPresentationAdapter.swift in Sources */,
 				C6A1FB212AC0B33E0035E91C /* ViewController.swift in Sources */,
+				C60839102B14D28E0058DB81 /* CombineHelpers.swift in Sources */,
 				C6770EBB2B0374B600E3DEA4 /* FeedUIComposer.swift in Sources */,
 				C6770EBC2B0374B600E3DEA4 /* FeedImageDataLoaderPresentationAdapter.swift in Sources */,
 				C6770EBE2B0374B600E3DEA4 /* FeedViewAdapter.swift in Sources */,
